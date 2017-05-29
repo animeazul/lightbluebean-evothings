@@ -1,0 +1,34 @@
+{
+  "name": "lightbluebean-basicforgut",
+  "version": "1.0.0",
+  "title": "Light Blue Bean - Basic",
+  "description": "Simple app to control a Light Blue Bean using Bluetooth Low Energy (BLE).",
+  "tags": [
+    {
+      "label": "arduino",
+      "type": "platform"
+    },
+    {
+      "label": "lightbluebean",
+      "type": "vendor"
+    },
+    {
+      "label": "ble",
+      "type": "comm"
+    }
+  ],
+  "libraries": [],
+  "plugins": [
+    {
+      "name": "cordova-plugin-ble",
+      "version": "2.0.0"
+    }
+  ],
+  "index-file": "index.html",
+  "app-dir": "app",
+  "uuid": "76e85e90-a367-4ded-8c3c-bc10cbe45503",
+  "icon": "app-icon.png",
+  "doc-url": "http://evothings.com/2.2/doc/examples/lightbluebean-basic.html",
+  "long-description": "Simple app to control a Light Blue Bean using Bluetooth Low Energy (BLE).",
+  "cordova-id": "com.evothings.examples.lightbluebeanbasic"
+}
