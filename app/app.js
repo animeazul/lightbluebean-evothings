@@ -143,6 +143,7 @@ app.disconnect = function(user)
     document.getElementById('ledControl').style.display = 'none';
     document.getElementById('temperatureDisplay').style.display = 'none';
     document.getElementById('BatteryDisplay').style.display = 'none';
+    document.getElementById('MotorControl').style.display = 'none';
     // Stop any ongoing scan and close devices.
     evothings.easyble.stopScan();
     evothings.easyble.closeConnectedDevices();
@@ -208,7 +209,27 @@ app.synchronizeLeds = function()
     }
  
     app.readDataFromScratch(1, onDataReadSuccess, onDataReadFailure);};
+app.synchronizeMotor = function()
+{
+    function onDataReadSuccess(data)
+    {
+        var MotorData = new Uint8Array(data);
  
+        document.getElementById('Motor1').value = MotorData[0];
+        document.getElementById('Motor2').value = MotorData[1];
+        document.getElementById('Motor3').value = MotorData[2];
+ 
+        console.log('Motor synchronized.');
+    }
+ 
+    function onDataReadFailure(errorCode)
+    {
+        console.log('Failed to synchronize Motor with error: ' + errorCode);
+        app.disconnect();
+    }
+ 
+    app.readDataFromScratch(4, onDataReadSuccess, onDataReadFailure);};
+  
 app.sendLedUpdate = function()
 {
     if (app.connected)
@@ -241,7 +262,40 @@ app.sendLedUpdate = function()
         greenLed = document.getElementById('greenLed').value = 0;
         blueLed = document.getElementById('blueLed').value = 0;
     }};
+
+app.sendMotorUpdate = function()
+{
+    if (app.connected)
+    {
+        // Fetch LED values from UI
+        Motor1 = document.getElementById('Motor1').value;
+        Motor2 = document.getElementById('Motor2').value;
+        Motor3 = document.getElementById('Motor3').value;
+        // Print out fetched LED values
+        console.log('redLed: ' + Motor1 + ', greenLed: ' + Motor2 + ', blueLed: ' + Motor3);
+        // Create packet to send
+        data = new Uint8Array([Motor1, Motor2, Motor3]);
+        // Callbacks
+        function onDataWriteSuccess()
+        {
+            console.log('Succeded to write data.');
+        }
  
+        function onDataWriteFailure(errorCode)
+        {
+            console.log('Failed to write data with error: ' + errorCode);
+            app.disconnect();
+        };
+ 
+        app.writeDataToScratch(4, data, onDataWriteSuccess, onDataWriteFailure);
+    }
+    else
+    {
+        Motor1 = document.getElementById('Motor1').value = 0;
+        Motor2 = document.getElementById('Motor2').value = 0;
+        Motor3 = document.getElementById('Motor3').value = 0;
+    }};
+
 app.writeDataToScratch = function(scratchNumber, data, succesCallback, failCallback)
 {
     if (app.connected)
@@ -256,8 +310,7 @@ app.writeDataToScratch = function(scratchNumber, data, succesCallback, failCallb
     else
     {
         console.log('Not connected to device, cant write data to scratch.');
-    }
-};
+    }};
 app.readDataFromScratch = function(scratchNumber, successCallback, failCallback)
 {
     if (app.connected)
