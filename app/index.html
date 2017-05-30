@@ -1,6 +1,5 @@
 </html><!DOCTYPE html>
 <html>
- 
 <head>
  
     <meta charset="utf-8" />
@@ -65,26 +64,20 @@
  
 <body ontouchstart="">
     <header>
- 
         <button class="back" onclick="history.back()">
             <img src="ui/images/arrow-left.svg" />
         </button>
- 
         <img class="logotype" src="ui/images/logo.svg" alt="Evothings" />
  
     </header>
  
     <h1>LightBlue Bean - Basic</h1>
- 
     <h2>Enter the name of your LightBlue Bean</h2>
- 
     <input id="BLEId" value="LightBlueBean" type="url">
- 
     <button id="BLEButton" class="green" onclick="app.connect()">CONNECT</button>
     <br />
  
     <p><b>Status:</b> <span id="BLEStatus">Not connected</span></p>
- 
     <div id="temperatureDisplay" style="display:none">
         <hr>
     <p class="topic">Temperature</p>
@@ -97,12 +90,12 @@
         <p class="temperatureLabel"><span id="Battery">N/A</span> C&deg;</p>
     </div> <!-- Fin Agregado -->  
    
-     <div id="MotorContol" style="display:none">
+     <div id="MotorControl" style="display:none">
         <hr>
-        <p class="topic">LED control</p>
-        <input type="range" id="Motor1" min="0" max="120" step="1" value="0" onchange="app.sendLedUpdate()"><br>
-        <input type="range" id="Motor2" min="0" max="120" step="1" value="0" onchange="app.sendLedUpdate()"><br>
-        <input type="range" id="Motor3" min="0" max="120" step="1" value="0" onchange="app.sendLedUpdate()"><br>
+        <p class="topic">Motor control</p>
+        <input type="range" id="Motor1" min="0" max="120" step="1" value="0" onchange="app.sendMotorUpdate()"><br>
+        <input type="range" id="Motor2" min="0" max="120" step="1" value="0" onchange="app.sendMotorUpdate()"><br>
+        <input type="range" id="Motor3" min="0" max="120" step="1" value="0" onchange="app.sendMotorUpdate()"><br>
      </div> 
 
 
